@@ -1,7 +1,9 @@
 import { createApp } from 'vue'
+import { createStore } from 'vuex'; 
 import App from './App.vue'
 import router from './router'
-import { createStore } from 'vuex'; 
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
 // import store from './store'
 
 const store = createStore({
@@ -11,7 +13,8 @@ const store = createStore({
           username: '',
           password: '',
           isLogin: false
-        }
+        },
+    
       }
     },
     mutations: {
@@ -19,11 +22,13 @@ const store = createStore({
         state.user.username = userData.username;
         state.user.password = userData.password;
         state.user.isLogin = true;
-      }
+      },
     }
   });
 
 const app = createApp(App);
+
+// app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(store);
 app.use(router);
 app.mount('#app');

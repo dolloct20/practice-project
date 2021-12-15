@@ -36,6 +36,16 @@ export default {
           this.user.passwordError = this.user.password.length > 5 ? '' : 'Password must be at least 6 chars long'
         },
         userLogin() {
+            let username = this.user.username
+            let password = this.user.password
+            if(username != '' && password != ''){
+                if(username == this.$store.state.user.username && password == this.$store.state.user.password){
+                    console.log('login success!')
+                }
+                else{
+                    console.log('login failed!')
+                }
+            }
           this.$store.commit(
             'setUserData', { userData: this.user }
             );
@@ -52,7 +62,8 @@ export default {
     }
     form {
         width: 420px;
-        margin: 20px auto;
+        margin: auto;
+        margin-top: 100px;
         background: white;
         text-align: left;
         padding: 30px;
