@@ -1,43 +1,136 @@
 <template>
-<link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
   <!-- The sidebar -->
   <div class="nav">
-    <h1><i class="fas fa-hospital-alt">WanFang</i></h1>
-    <a class="active" href="#home">Home</a>
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
-
+    <div class='nav-icon'>
+      <i class="fas fa-hospital-alt"></i>
+      <div>WanFang</div>
+    </div>
+    <div class="nav-user">
+      <input type="text" placeholder="Search..">
+      <button><i class="fas fa-bell"></i></button>
+      <button><i class="fas fa-user-circle"></i></button>
+      <span class="nav-text">Hi, yuting!!</span>
+    </div>
   </div>
   <div class="sidebar">
-    <a class="active" href="#home">Home</a>
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
+    <div>
+      <a class='active' href="#home">
+        <span class="icon">
+          <i class="fas fa-home"></i>
+        </span>
+        Home
+      </a>
+    </div>
+    <div>
+      <a href="#news">
+        <span class='icon'>
+          <i class="fas fa-fw fa-clipboard-list"></i>
+        </span>
+        Dashboard
+      </a>
+    </div>
+    <div>
+      <a href="#contact">
+        <span class='icon'>
+        <i class="fas fa-fw fa-procedures"></i>
+        </span>
+        Data
+      </a>
+    </div>
+    <div>
+      <a href="#about">
+        <span class='icon'>
+        <i class="fas fa-fw fa-file-medical-alt"></i>
+        </span>
+        About
+      </a>
+    </div>
   </div>
 
   <!-- Page content -->
   <div class="content">
-    ..
+    <div class="table">
+      <h2>Table</h2>
+        <div>
+        </div>
+        <table>
+            <tr v-for='data in datas' :key='data.id'>
+              <th> {{ data.bedno }}</th>
+              <th> {{ data.name }}</th>
+              <th>{{ data.age }}</th>
+            </tr>
+        </table>
+    </div>
   </div>
-  
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      datas: []
+    }
+  },
+  created() {
+    fetch('./PatientList.json')
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
+        this.datas = data.datas;
+      }).catch(error => {
+        console.log(error);
+      })
+  }
+}
+</script>
 
-
-<style scoped>
-
-
+<style>
 /* The navigation menu */
+
 .nav{
   width: 100%;
   height: 100px;
   position: fixed;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
   background-color: white;
-  color: black;
+  color: #586180;
   font-size: 20px;
+}
+.nav-text{
+  display: flex;
+  white-space:nowrap;
+  align-items: center;
+  margin-left: 20px;
+}
+
+/* navigation icon */
+.nav-icon {
+  /* background-color: #E2AC29; */
+  font-size: 25px;
+  margin: 30px;
+}
+.nav button {
+  background-color: #D34C7B;
+  color: white;
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 20px;
+  border-radius: 20px;
+}
+.nav-user {
+  background-color: gainsboro;
+  display: inline-flex;
+  padding: 10px;
+}
+.nav-user input {
+  display: block;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  font-size: 15px;
+  border-radius: 20px;
 }
 
 /* The side navigation menu */
@@ -57,6 +150,7 @@
   display: block;
   color: #586180;
   padding: 20px;
+  margin: 0px;
   text-decoration: none;
 }
 
@@ -72,13 +166,42 @@
   background-color: #586180;
   color: white;
   opacity: 0.6;
+  font-weight: bolder;
+}
+
+.icon {
+  margin-right: px;
+  font-size: 20px;
 }
 
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 div.content {
-  margin-left: 250px;
+  top: 100px;
+  left: 250px;
+  right: 0px;
+  bottom: 0px;
+  margin: 15px 15px;
   padding: 1px 10px;
-  height: 1000px;
+  
+  overflow: hidden;
+  position: fixed;
+}
+
+/* Table */
+table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  border: 1px solid #586180;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 15px;
+}
+
+tr:nth-child(even) {
+  background-color: #ddd;
 }
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
