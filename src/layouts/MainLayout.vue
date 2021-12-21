@@ -11,19 +11,19 @@
     </div>
     <div class="nav-user">
       <form class="search-bar">
-        <input type="text" v-model="search" placeholder="Search..">
+        <input  v-model="search" placeholder="Search..">
         <button type='submit'><i class="fas fa-search"></i></button>
-        <div class='search-table'>
-          <!-- <tr v-for="s in searchData" :key='s.chr_no' >
-            <td>{{ s.name }}</td>
-            <td>{{ s.chr_no }}</td>
-            <td>{{ s.ward }}</td>
-          </tr> -->
-          <ul>
+        <div v-if="isVisible" class='search-table'>
+            <tr v-for="patient in searchData" :key='patient.chr_no' @click="goToPatientPage(patient)">
+              <td>{{ patient.name }}</td>
+              <td>{{ patient.fee_no }}</td>
+              <td>{{ patient.ward }}</td>
+            </tr>
+          <!-- <ul>
             <li v-for="s in searchData" :key='s.chr_no' >
-              {{ s.name }}
+              {{ s.name }} // {{s.fee_no}}
             </li>
-          </ul>
+          </ul> -->
         </div>
       </form>
       <button><i class="fas fa-bell"></i></button>
@@ -50,7 +50,7 @@
 
   <!-- Page content -->
   <div class="content">
-    <router-view></router-view>
+    <router-view/>
   </div>
 </template>
 
@@ -58,9 +58,9 @@
 export default {
   data() {
     return {
-      datas: [],
+      ipdList: [],
       search: '',
-      // isVisible: false
+      isVisible: false
     }
   },
   created() {
@@ -68,25 +68,37 @@ export default {
       .then(response => response.json())
       .then(data => {
         console.log(data)
-        this.datas = data;
+        this.ipdList = data;
       }).catch(error => {
         console.log(error);
       })
   },
   methods:{
+    goToPatientPage(patient){
+      this.$router.push({path: `/note/${patient.fee_no}`})
+    }
   },
   computed:{
     searchData() {
       if(this.search != '' && this.search) {
-        return this.datas.filter(d => {
-          return (d.fee_no.toLowerCase().includes(this.search.toLowerCase()) ||
+        // this.isVisible = true;
+        return this.ipdList.filter(d => 
+          d.fee_no.toLowerCase().includes(this.search.toLowerCase()) ||
           d.name.includes(this.search) ||
           d.ward.toLowerCase().includes(this.search.toLowerCase()))
-        });
       }else{
         return false
       }
-    } 
+    }
+  },
+  watch:{
+    search: function() {
+      if(this.search) {
+        this.isVisible = true;
+      } else{
+        this.isVisible = false;
+      }
+    }
   }
 }
 </script>
@@ -103,6 +115,7 @@ export default {
   background-color: white;
   color: #586180;
   font-size: 20px;
+  z-index: 999;
 }
 
 /*navigation logo */
@@ -138,6 +151,7 @@ div.nav-user {
   display: flex; 
   padding: 10px;
   margin-top: 0px;
+  z-index: 999;
 }
 .nav-user .search-bar button{
   background-color: #777;
@@ -153,23 +167,23 @@ div.nav-user {
   border-radius: 20px;
 }
 .search-table{
+  z-index: 999;
   background-color: aquamarine;
-  width: 400px;
+  width: 355px;
   height: 150px;
   position: absolute;
   display: flex;
   justify-content: center;
   overflow: auto;
   flex-wrap: wrap;
-  left: 870px;
-  top: 100px;
-  text-decoration: none;
+  top: 80px;
 }
-
-.search-table li {
-  text-decoration: none;
-
-}
+/* ul, li{
+  color: white;
+  margin: 5px;
+  background-color: bisque;
+  text-align: center;
+} */
 
 
 /* The side navigation menu */
@@ -220,22 +234,16 @@ div.content {
 }
 
 /* Table */
-table {
-  margin-top: 20px;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-th, td {
-  text-align: left;
-  padding: 15px;
+td {
+  padding: 10px;
+  font-size: 18px;
   border-bottom: 1px solid #586180;
 }
 
-tr:hover{
+/* .search-table tr:hover {
   background-color: #ddd;
   border-bottom: 2.5px solid #586180;
-}
+} */
 
 </style>
 
