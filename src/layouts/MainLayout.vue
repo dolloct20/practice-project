@@ -14,7 +14,7 @@
         <input  v-model="search" placeholder="Search..">
         <button type='submit'><i class="fas fa-search"></i></button>
         <div v-if="isVisible" class='search-table'>
-            <tr v-for="patient in searchData" :key='patient.chr_no' @click="goToPatientPage(patient)">
+            <tr v-for="patient in searchData" :key='patient.chr_no' @click="goToPatientNote(patient)">
               <td>{{ patient.name }}</td>
               <td>{{ patient.fee_no }}</td>
               <td>{{ patient.ward }}</td>
@@ -74,7 +74,8 @@ export default {
       })
   },
   methods:{
-    goToPatientPage(patient){
+    goToPatientNote(patient){
+      
       this.$router.push({path: `/note/${patient.fee_no}`})
     }
   },
@@ -167,8 +168,7 @@ div.nav-user {
   border-radius: 20px;
 }
 .search-table{
-  z-index: 999;
-  background-color: aquamarine;
+  background-color: #ddd;
   width: 355px;
   height: 150px;
   position: absolute;
@@ -238,12 +238,14 @@ td {
   padding: 10px;
   font-size: 18px;
   border-bottom: 1px solid #586180;
+  cursor: pointer;
 }
 
-/* .search-table tr:hover {
-  background-color: #ddd;
+.search-table tr:hover {
+  background-color: #eee;
   border-bottom: 2.5px solid #586180;
-} */
+  font-weight: bold;
+}
 
 </style>
 

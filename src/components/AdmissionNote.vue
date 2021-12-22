@@ -28,13 +28,39 @@
       </div>
     </div>
     <form>
-      <div class="sex">
+      <div class="radio">
         <label>Sex:</label>
-        <input type="checkbox" id="checkbox" value="male" required>
-        <label>Male</label>
-        <input type="checkbox" id="checkbox" value="female" required>
-        <label>Female</label>
+        <label>
+          <input type="radio" id="choice1" name='sex' value="male" >
+          <span>Male</span>
+        </label>
+        <label>
+          <input type="radio" id="choice2" name='sex' value="female">
+          <span>Female</span>
+        </label>
       </div>
+      <div class="radio">
+        <label>Smoking history:</label>
+        <label>
+          <input type="radio" id="choice1" name='smoking' value="yes" >
+          <span>Yes</span>
+        </label>
+        <label>
+          <input type="radio" id="choice2" name='smoking' value="no">
+          <span>No</span>
+        </label>
+      </div>
+      <div class="radio">
+        <label>Drinking history:</label>
+        <label>
+          <input type="radio" id="choice1" name='drinking' value="yes" >
+          <span>Yes</span>
+        </label>
+        <label>
+          <input type="radio" id="choice2" name='drinking' value="no">
+          <span>No</span>
+        </label>
+    </div>
 
       <label>Role:</label>
       <select v-model="role">
@@ -84,7 +110,6 @@ export default {
       this.skills = this.skills.filter((item) => {
         return skill !== item 
       })
-
     }
   }
 }
@@ -116,14 +141,65 @@ input, select {
   border-bottom: 2px solid #ddd;
   color: #555;
 }
-
-input[type="checkbox"] {
-  display: inline-block;
-  width: 16px;
-  margin: 0 10px 0 0;
-  position: relative;
-  top: 2px;
+div.radio{
+  display: flex;
+  align-items: center;
 }
+select:focus{
+  outline: 0;
+  border-color: #AFD0C9
+}
+
+input[type="text"]:focus{
+  outline: 0;
+  border-color: #AFD0C9
+}
+
+input[type="radio"] {
+  position: absolute;
+  display: none;
+}
+
+input[type="radio"]:checked + span {
+  color: white;
+  background-color: #555;
+}
+
+input[type="radio"]:checked + span:before {
+  box-shadow: inset 0 0 0 2em #AFD0C9;
+  
+}
+
+label span {
+  display: flex;
+  align-items: center;
+  padding: 0.7em 2em 0.7em 0.7em; 
+  border-radius: 10em;
+  margin-left: 1em;
+  transition: 0.25s ease;
+  cursor: pointer;
+  background-color: #eee;
+}
+
+label span:hover{
+  background-color: #AFD0C9;
+  color: white;
+}
+
+/* radio dot */
+label span:before{
+  display: flex;
+  flex-shrink: 0;
+  content: "";
+  background-color: #eee;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  margin-right: 1em;
+  transition: 0.3s ease;
+  box-shadow: inset 0 0 0 0.35em #ddd;
+}
+
 .pill{
   display: inline-block;
   margin: 20px 10px 0 0;
