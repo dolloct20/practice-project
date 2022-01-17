@@ -3,9 +3,10 @@ import LoginPage from '../components/LoginPage.vue';
 import Dashboard from '../components/Dashboard.vue';
 import Note from '../components/Note.vue'
 // import ProgressNote from '../components/ProgressNote.vue'
-import AdmissionNote from '../components/AdmissionNote.vue'
+// import AdmissionNote from '../components/AdmissionNote.vue'
 // import DischargeNote from '../components/DischargeNote.vue'
 import MainLayout from  '../layouts/MainLayout.vue'
+import PatientPage from '../components/PatientPage.vue' 
 
 
 const routes = [
@@ -26,8 +27,8 @@ const routes = [
       component: Note,
         children: [
           {
-            path: '/note/admission/:fee_no',
-            component: AdmissionNote,
+            path: '/note/:fee_no',
+            component: PatientPage,
             props:true
           }
         ]

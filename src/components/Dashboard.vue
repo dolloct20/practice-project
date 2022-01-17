@@ -12,11 +12,11 @@
               <th>性別</th>
               <th>主治醫師</th>
             </tr>
-            <tr v-for='data in datas' :key='data.id'>
-              <th> {{ data.bed_no }}</th>
-              <th> {{ data.name }}</th>
-              <th>{{ data.sex }}</th>
-              <th>{{ data.ward }}</th>
+            <tr v-for='data in datas' :key='data.id' @click="$emit('goToPatientNote', data)">
+              <td> {{ data.bed_no }}</td>
+              <td> {{ data.name }}</td>
+              <td>{{ data.sex }}</td>
+              <td>{{ data.ward }}</td>
             </tr>
         </table>
     </div>
@@ -39,12 +39,14 @@ export default {
       }).catch(error => {
         console.log(error);
       })
+  },
+  methods:{
   }
 }
 </script>
 
 <style>
-/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+/* Page content */
 div.content {
   top: 100px;
   left: 250px;
@@ -59,11 +61,11 @@ div.content {
 table {
   margin-top: 20px;
   border-collapse: collapse;
+  table-layout: auto;
   width: 100%;
 }
 
 th, td {
-  text-align: left;
   padding: 15px;
   border-bottom: 1px solid #586180;
   

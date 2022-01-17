@@ -50,7 +50,7 @@
 
   <!-- Page content -->
   <div class="content">
-    <router-view/>
+    <router-view @go-to-patient-note='goToPatientNote($event)'></router-view>
   </div>
 </template>
 
@@ -75,7 +75,9 @@ export default {
   },
   methods:{
     goToPatientNote(patient){
-      
+      let id = "WF" + Date.now() + Math.random()
+      patient.new_id = id
+      console.log(patient)
       this.$router.push({path: `/note/${patient.fee_no}`})
     }
   },

@@ -11,10 +11,10 @@
             <th>主治醫師</th>
           </tr>
           <tr v-for='data in datas' :key='data.id'>
-            <th> {{ data.bed_no }}</th>
-            <th> {{ data.name }}</th>
-            <th>{{ data.sex }}</th>
-            <th>{{ data.ward }}</th>
+            <td> {{ data.bed_no }}</td>
+            <td> {{ data.name }}</td>
+            <td>{{ data.sex }}</td>
+            <td>{{ data.ward }}</td>
           </tr>
         </table>
       <!-- <form>
