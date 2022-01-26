@@ -7,14 +7,14 @@
         <button @click="editProgressNote">Progress Note</button>
         <button @click="editDischargeNote">Discharge Note</button>
       </div>
-      <!-- <admission-note></admission-note> -->
+      <patient-page></patient-page>
     </div>
     <p></p>
   </div>
 </template>
 
 <script>
-// import AdmissionNote from './AdmissionNote.vue'
+import PatientPage from './PatientPage.vue'
 
 export default {
   data() {
@@ -22,7 +22,7 @@ export default {
     }
   },
   components: {
-    // AdmissionNote
+    PatientPage
   },
   methods:{
 
