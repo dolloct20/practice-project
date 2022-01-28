@@ -20,8 +20,8 @@
             <td> {{ data.chr_no }}</td>
             <td> {{ data.bed_no }}</td>
             <td> {{ data.name }}</td>
-            <td>{{ data.birthdate}}</td>
-            <td>{{ data.ward }}</td>
+            <td> {{ data.birthdate }}</td>
+            <td> {{ data.ward }}</td>
           </tr>
         </tbody>
       </table>
@@ -45,8 +45,8 @@
             <td> {{ data.chr_no }}</td>
             <td> {{ data.bed_no }}</td>
             <td> {{ data.name }}</td>
-            <td>{{ data.birthdate}}</td>
-            <td>{{ data.ward }}</td>
+            <td> {{ data.birthdate }}</td>
+            <td> {{ data.ward }}</td>
           </tr>
         </tbody>
       </table>
@@ -58,6 +58,11 @@
   </div>
 </template>
 
+<script>
+export default {
+  props: ["datas"]
+}
+</script>
 
 <style scoped>
 
@@ -73,20 +78,20 @@
   grid-column-start: 1;
   grid-column-end: 4;
   grid-row-start: 1;
-  background-color: rebeccapurple;
+  background-color: #fff;
 } 
 
 .lab{
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 2;
-  background-color: gold;
+  background-color: #E7E975;
 } 
 
 .note{
   grid-column-start: 3;
   grid-row-start: 2;
-  background-color: peachpuff;
+  background-color: #AFC5DC;
 } 
 
 </style>

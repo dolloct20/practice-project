@@ -7,7 +7,7 @@
         <button @click="editProgressNote">Progress Note</button>
         <button @click="editDischargeNote">Discharge Note</button>
       </div>
-      <patient-page></patient-page>
+      <patient-page :datas="datas"></patient-page>
     </div>
     <p></p>
   </div>
@@ -19,11 +19,22 @@ import PatientPage from './PatientPage.vue'
 export default {
   data() {
     return {
+      datas: []
     }
   },
   components: {
     PatientPage
   },
+  // created() {
+  //   fetch('http://10.65.1.66:3001/api/ipd.list')
+  //     .then(response => response.json())
+  //     .then((data) => {
+  //       console.log(data)
+  //       this.datas = data;
+  //     }).catch(error => {
+  //       console.log(error);
+  //     })
+  // },
   methods:{
 
   }
@@ -39,7 +50,7 @@ div.content {
   right: 0px;
   bottom: 0px;
   margin: 15px 15px;
-  padding: 1px 10px;
+  padding: 1px 5px;
   position: fixed;
 }
 

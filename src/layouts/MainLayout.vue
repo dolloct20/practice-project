@@ -123,7 +123,6 @@ export default {
 
 /*navigation logo */
 div.nav-icon button { 
-  background-color: #E2AC29;
   color: black;
   padding: 10px 15px;
   font-size: 25px;
